@@ -49,6 +49,11 @@ sub format_link {
     if (!defined $url || $url eq '') {
         return $text;
     }
+    
+    if ($url =~ /^[$WORD]+$/) {
+    	$url = './' . $self->kwiki_hub->config->script_name . "?$url";
+    }
+    
     if (exists $self->{links} && exists $self->{links}{$url}) {
         $title ||= $self->{links}{$url}{title};
         $url = $self->{links}{$url}{url};
